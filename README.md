@@ -1,30 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+# shopping-list-app
 
-## Getting Started
+This is a shopping list app built with Next.js and aws services
 
-First, run the development server:
+Demo [Link](https://www.shopping-list-app.com) <br>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+![Demo](https://res.cloudinary.com/rosborne/image/upload/v1583105642/Shopping-List-App/demo.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Purpose
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+To help others keep track of there current shopping items.
 
-## Learn More
+### Tech Used
 
-To learn more about Next.js, take a look at the following resources:
+-   Auth0
+-   Dynamodb
+-   Nextjs
+-   React
+-   Typescript
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Running the app locally
 
-You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on ZEIT Now
-
-The easiest way to deploy your Next.js app is to use the [ZEIT Now Platform](https://zeit.co/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Run `yarn install` and `yarn run dev` to start up the app.

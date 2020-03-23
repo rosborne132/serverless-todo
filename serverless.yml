@@ -1,0 +1,35 @@
+org: rosborne132
+app: todo-app
+service: todo-app
+
+myApp:
+    component: 'serverless-next.js'
+    inputs:
+        region: us-west-2
+
+database:
+    component: '@serverless/aws-dynamodb'
+    inputs:
+        name: todo-items-prod
+        region: us-west-2
+        attributeDefinitions:
+            - AttributeName: itemId
+              AttributeType: S
+            - AttributeName: itemName
+              AttributeType: S
+        keySchema:
+            - AttributeName: itemId
+              KeyType: HASH
+            - AttributeName: itemName
+              KeyType: RANGE
+        billingMode: PROVISIONED
+        globalSecondaryIndexes:
+            - IndexName: itemName-index
+              KeySchema:
+                  - AttributeName: itemName
+                    KeyType: HASH
+              Projection:
+                  ProjectionType: ALL
+        TimeToLiveSpecification:
+            AttributeName: ExpireAt
+            Enabled: true
