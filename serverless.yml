@@ -13,20 +13,20 @@ database:
         name: todo-items-prod
         region: us-west-2
         attributeDefinitions:
-            - AttributeName: itemId
+            - AttributeName: todoId
               AttributeType: S
-            - AttributeName: itemName
+            - AttributeName: todoName
               AttributeType: S
         keySchema:
-            - AttributeName: itemId
+            - AttributeName: todoId
               KeyType: HASH
-            - AttributeName: itemName
+            - AttributeName: todoName
               KeyType: RANGE
         billingMode: PROVISIONED
         globalSecondaryIndexes:
-            - IndexName: itemName-index
+            - IndexName: todoName-index
               KeySchema:
-                  - AttributeName: itemName
+                  - AttributeName: todoName
                     KeyType: HASH
               Projection:
                   ProjectionType: ALL
