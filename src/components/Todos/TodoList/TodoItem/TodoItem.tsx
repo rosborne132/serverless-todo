@@ -5,9 +5,9 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Todo, TodoItemContext } from '../../../../context'
 
 export const TodoItem: React.FC<Todo> = React.memo(
-    ({ todoId, todoName, isPurchased }): JSX.Element => {
+    ({ todoId, todoName, isComplete }): JSX.Element => {
         const { editTodo, deleteTodo } = React.useContext(TodoItemContext)
-        const crossedThrough = isPurchased ? 'strike' : ''
+        const crossedThrough = isComplete ? 'strike' : ''
 
         return (
             <motion.li

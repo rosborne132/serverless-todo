@@ -1,0 +1,7 @@
+{
+  "lastDeployHadNameDefined": true,
+  "arn": "arn:aws:dynamodb:us-west-2:280138148799:table/todo-items-prod",
+  "name": "todo-items-prod",
+  "region": "us-west-2",
+  "delete": true
+}

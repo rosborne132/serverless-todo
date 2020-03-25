@@ -5,7 +5,7 @@ import axios from 'axios'
 export type Todo = {
     todoId: number
     todoName: string
-    isPurchased: boolean
+    isComplete: boolean
 }
 
 export type InitState = {
@@ -30,14 +30,13 @@ export const TodoItemProvider = ({ children }) => {
     const apiUrl: string = '/api/item'
 
     React.useEffect(() => {
-        // axios.get(apiUrl).then(res => {
-        //     setTodos(res.data)
-        // })
+        axios.get(apiUrl).then(res => {
+            setTodos(res.data)
+        })
     }, [])
 
     const addTodo = async (todoName: string): Promise<void> => {
         let newTodo
-        console.log(todoName)
         try {
             newTodo = await axios.post(apiUrl, { todoName })
         } catch (err) {
@@ -49,31 +48,32 @@ export const TodoItemProvider = ({ children }) => {
         }
     }
 
-    const editTodo = async (itemId: string): Promise<void> => {
-        let newItem
-        const item = todos.filter(item => item.itemId === itemId)[0]
-        // try {
-        //     newItem = await axios.patch(apiUrl, { item })
-        // } catch (err) {
-        //     console.error(err)
-        // } finally {
-        //     const newItems = items.map(item =>
-        //         item.itemId === itemId ? newItem.data : item
-        //     )
-        //     setTodos(newItems)
-        // }
+    const editTodo = async (todoId: string): Promise<void> => {
+        let newTodo
+        const todo = todos.filter(todo => todo.todoId === todoId)[0]
+
+        try {
+            newTodo = await axios.patch(apiUrl, { todo })
+        } catch (err) {
+            console.error(err)
+        } finally {
+            const newTodos = todos.map(todo =>
+                todo.todoId === todoId ? newTodo.data : todo
+            )
+            setTodos(newTodos)
+        }
     }
 
-    const deleteTodo = async (itemId: string): Promise<void> => {
-        // try {
-        //     await axios.delete(`${apiUrl}?itemId=${itemId}`)
-        // } catch (err) {
-        //     console.error(err)
-        //     return
-        // } finally {
-        //     const newItems = items.filter(item => item.itemId !== itemId)
-        //     setTodos(newItems)
-        // }
+    const deleteTodo = async (todoId: string): Promise<void> => {
+        try {
+            await axios.delete(`${apiUrl}?todoId=${todoId}`)
+        } catch (err) {
+            console.error(err)
+            return
+        } finally {
+            const newTodos = todos.filter(todo => todo.todoId !== todoId)
+            setTodos(newTodos)
+        }
     }
 
     const initState: InitState = {

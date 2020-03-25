@@ -8,9 +8,7 @@ export default async (req: express.Request, res: express.Response) => {
     switch (req.method) {
         case 'POST':
             const { todoName } = req.body
-            results = await putTodo({
-                todoName
-            })
+            results = await putTodo({ todoName })
             break
 
         case 'GET':

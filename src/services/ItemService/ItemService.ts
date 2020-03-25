@@ -10,20 +10,7 @@ export type Todo = {
 const TableName = 'todo-items-prod'
 
 export const getTodos = async (): Promise<Todo[]> => {
-    const { Items } = await dbClient
-        .query({
-            TableName,
-            IndexName: 'username-index',
-            ProjectionExpression: 'isComplete, itemId, itemName',
-            KeyConditionExpression: '#user = :v_user'
-            // ExpressionAttributeNames: {
-            //     '#user': 'username'
-            // },
-            // ExpressionAttributeValues: {
-            //     ':v_user': { S: username }
-            // }
-        })
-        .promise()
+    const { Items } = await dbClient.scan({ TableName }).promise()
 
     return Items.map(item => parseData.unmarshall(item))
 }
@@ -37,6 +24,7 @@ export const putTodo = async ({ todoName }: Todo): Promise<Todo> => {
             todoName
         }
     }
+
     try {
         await docClient.put(params).promise()
     } catch (err) {
@@ -50,13 +38,9 @@ export const putTodo = async ({ todoName }: Todo): Promise<Todo> => {
 export const deleteTodo = async ({ todoId }: Todo) => {
     const params = {
         TableName,
-        Key: {
-            todoId
-        },
-        ConditionExpression: 'itemId = :id',
-        ExpressionAttributeValues: {
-            ':id': todoId
-        }
+        Key: { todoId },
+        ConditionExpression: 'todoId = :id',
+        ExpressionAttributeValues: { ':id': todoId }
     }
 
     try {
@@ -74,14 +58,9 @@ export const patchTodo = async ({
     const newValue = !isComplete
     const params = {
         TableName,
-        Key: {
-            todoId
-        },
+        Key: { todoId },
         UpdateExpression: 'set isComplete = :val',
-        ExpressionAttributeValues: {
-            ':val': newValue
-        },
-
+        ExpressionAttributeValues: { ':val': newValue },
         ReturnValues: 'UPDATED_NEW'
     }
 

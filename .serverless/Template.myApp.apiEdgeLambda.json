@@ -1,0 +1,17 @@
+{
+  "name": "rv9wu4-d44otf",
+  "hash": "cGuq7kUS0d/l4SrOzWYC2zKNpbXdqmnShGrA2noR12Y=",
+  "description": "API Lambda@Edge for Next CloudFront distribution",
+  "memory": 512,
+  "timeout": 10,
+  "code": "/Users/robertosborne/Documents/Programming/Web Development/Thinkful/react/next/todo-app/.serverless_nextjs/api-lambda",
+  "shims": [],
+  "handler": "index.handler",
+  "runtime": "nodejs10.x",
+  "env": {},
+  "role": {
+    "arn": "arn:aws:iam::280138148799:role/rv9wu4-nbple3q"
+  },
+  "arn": "arn:aws:lambda:us-east-1:280138148799:function:rv9wu4-d44otf",
+  "region": "us-east-1"
+}

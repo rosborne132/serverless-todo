@@ -11,11 +11,11 @@ export const TodoList: React.FC = React.memo(
 
         return (
             <ul className="pa0">
-                {todos.map(({ todoId, todoName, isPurchased }) => (
+                {todos.map(({ todoId, todoName, isComplete }) => (
                     <TodoItem
                         todoId={todoId}
                         todoName={todoName}
-                        isPurchased={isPurchased}
+                        isComplete={isComplete}
                     />
                 ))}
             </ul>
