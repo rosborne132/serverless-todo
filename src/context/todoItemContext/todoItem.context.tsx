@@ -35,17 +35,18 @@ export const TodoItemProvider = ({ children }) => {
         // })
     }, [])
 
-    const addTodo = async (itemName: string): Promise<void> => {
-        let newItem
-        // try {
-        //     newItem = await axios.post(apiUrl, { itemName })
-        // } catch (err) {
-        //     console.error(err)
-        // } finally {
-        //     const newItems = [...items, newItem.data]
+    const addTodo = async (todoName: string): Promise<void> => {
+        let newTodo
+        console.log(todoName)
+        try {
+            newTodo = await axios.post(apiUrl, { todoName })
+        } catch (err) {
+            console.error(err)
+        } finally {
+            const newTodos = [...todos, newTodo.data]
 
-        //     setTodos(newItems)
-        // }
+            setTodos(newTodos)
+        }
     }
 
     const editTodo = async (itemId: string): Promise<void> => {

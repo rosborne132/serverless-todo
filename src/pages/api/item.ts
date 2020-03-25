@@ -1,31 +1,30 @@
 import * as express from 'express'
 
-import { deleteItem, getItems, patchItem, putItem } from '../../services'
+import { deleteTodo, getTodos, patchTodo, putTodo } from '../../services'
 
 export default async (req: express.Request, res: express.Response) => {
     let results
 
     switch (req.method) {
         case 'POST':
-            results = await putItem({
-                itemName: req.body.itemName
+            const { todoName } = req.body
+            results = await putTodo({
+                todoName
             })
             break
 
         case 'GET':
-            // results = await getItems({ username: user.nickname })
+            results = await getTodos()
             break
 
         case 'PATCH':
-            results = await patchItem({
-                item: req.body.item
-            })
+            const { todo } = req.body
+            results = await patchTodo(todo)
             break
 
         case 'DELETE':
-            results = await deleteItem({
-                itemId: req.query.itemId
-            })
+            const { todoId } = req.query
+            results = await deleteTodo({ todoId })
             break
 
         default:

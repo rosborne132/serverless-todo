@@ -4,7 +4,7 @@ import { TodoItemContext } from '../../../context'
 export const TodoForm: React.FC = React.memo(
     (): JSX.Element => {
         const [todoItem, setTodoItem] = React.useState<string>('')
-        const { addItem } = React.useContext(TodoItemContext)
+        const { addTodo } = React.useContext(TodoItemContext)
 
         const onSubmit = (e: React.FormEvent<EventTarget>): void => {
             e.preventDefault()
@@ -14,7 +14,7 @@ export const TodoForm: React.FC = React.memo(
             }
 
             setTodoItem('')
-            addItem(todoItem)
+            addTodo(todoItem)
         }
 
         return (

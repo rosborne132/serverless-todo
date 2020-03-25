@@ -1,20 +1,20 @@
 import { v4 as uuid } from 'uuid'
 import dbClient, { docClient, parseData } from '../../lib/dynamodb'
 
-export type Item = {
-    isPurchased?: boolean
-    itemId?: string
-    itemName?: string
+export type Todo = {
+    isComplete?: boolean
+    todoId?: string
+    todoName?: string
 }
 
-const TableName = 'user-items-prod'
+const TableName = 'todo-items-prod'
 
-export const getItems = async (): Promise<Item[]> => {
+export const getTodos = async (): Promise<Todo[]> => {
     const { Items } = await dbClient
         .query({
             TableName,
             IndexName: 'username-index',
-            ProjectionExpression: 'isPurchased, itemId, itemName',
+            ProjectionExpression: 'isComplete, itemId, itemName',
             KeyConditionExpression: '#user = :v_user'
             // ExpressionAttributeNames: {
             //     '#user': 'username'
@@ -28,13 +28,13 @@ export const getItems = async (): Promise<Item[]> => {
     return Items.map(item => parseData.unmarshall(item))
 }
 
-export const putItem = async ({ itemName }: Item): Promise<Item> => {
+export const putTodo = async ({ todoName }: Todo): Promise<Todo> => {
     const params = {
         TableName,
         Item: {
-            isPurchased: false,
-            itemId: uuid(),
-            itemName
+            isComplete: false,
+            todoId: uuid(),
+            todoName
         }
     }
     try {
@@ -42,20 +42,20 @@ export const putItem = async ({ itemName }: Item): Promise<Item> => {
     } catch (err) {
         console.error(err)
     } finally {
-        const { itemId, itemName, isPurchased } = params.Item
-        return { itemId, itemName, isPurchased }
+        const { todoId, todoName, isComplete } = params.Item
+        return { todoId, todoName, isComplete }
     }
 }
 
-export const deleteItem = async ({ itemId }: Item) => {
+export const deleteTodo = async ({ todoId }: Todo) => {
     const params = {
         TableName,
         Key: {
-            itemId
+            todoId
         },
         ConditionExpression: 'itemId = :id',
         ExpressionAttributeValues: {
-            ':id': itemId
+            ':id': todoId
         }
     }
 
@@ -66,15 +66,18 @@ export const deleteItem = async ({ itemId }: Item) => {
     }
 }
 
-export const patchItem = async ({ item }) => {
-    const { itemId, isPurchased, itemName } = item
-    const newValue = !isPurchased
+export const patchTodo = async ({
+    todoId,
+    isComplete,
+    todoName
+}: Todo): Promise<Todo> => {
+    const newValue = !isComplete
     const params = {
         TableName,
         Key: {
-            itemId
+            todoId
         },
-        UpdateExpression: 'set isPurchased = :val',
+        UpdateExpression: 'set isComplete = :val',
         ExpressionAttributeValues: {
             ':val': newValue
         },
@@ -87,6 +90,6 @@ export const patchItem = async ({ item }) => {
     } catch (err) {
         console.error(err)
     } finally {
-        return { itemId, itemName, isPurchased: !isPurchased }
+        return { todoId, todoName, isComplete: !isComplete }
     }
 }
