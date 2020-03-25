@@ -1,13 +1,11 @@
 import { Layout, Todos } from '../components'
 
-const Home = () => (
+export default () => (
     <Layout>
         <div className="container">
-            <h1 className="title">Welcome to Todo List</h1>
+            <h1 className="f1 lh-title tc">Todo List</h1>
 
             <Todos />
         </div>
     </Layout>
 )
-
-export default Home

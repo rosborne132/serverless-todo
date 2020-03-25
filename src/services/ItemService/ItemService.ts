@@ -30,8 +30,7 @@ export const putTodo = async ({ todoName }: Todo): Promise<Todo> => {
     } catch (err) {
         console.error(err)
     } finally {
-        const { todoId, todoName, isComplete } = params.Item
-        return { todoId, todoName, isComplete }
+        return params.Item
     }
 }
 
@@ -55,12 +54,11 @@ export const patchTodo = async ({
     isComplete,
     todoName
 }: Todo): Promise<Todo> => {
-    const newValue = !isComplete
     const params = {
         TableName,
         Key: { todoId },
         UpdateExpression: 'set isComplete = :val',
-        ExpressionAttributeValues: { ':val': newValue },
+        ExpressionAttributeValues: { ':val': !isComplete },
         ReturnValues: 'UPDATED_NEW'
     }
 

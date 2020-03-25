@@ -1,5 +1,4 @@
 import * as React from 'react'
-
 import axios from 'axios'
 
 export type Todo = {
@@ -26,17 +25,17 @@ export const TodoItemContext = React.createContext<InitState>(initState)
 
 export const TodoItemProvider = ({ children }) => {
     const [todos, setTodos] = React.useState([])
-
     const apiUrl: string = '/api/item'
 
     React.useEffect(() => {
-        axios.get(apiUrl).then(res => {
-            setTodos(res.data)
+        axios.get(apiUrl).then(({ data }) => {
+            setTodos(data)
         })
     }, [])
 
     const addTodo = async (todoName: string): Promise<void> => {
         let newTodo
+
         try {
             newTodo = await axios.post(apiUrl, { todoName })
         } catch (err) {

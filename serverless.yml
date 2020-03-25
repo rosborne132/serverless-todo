@@ -15,21 +15,10 @@ database:
         attributeDefinitions:
             - AttributeName: todoId
               AttributeType: S
-            # - AttributeName: todoName
-            #   AttributeType: S
         keySchema:
             - AttributeName: todoId
               KeyType: HASH
-            # - AttributeName: todoName
-            #   KeyType: RANGE
         billingMode: PROVISIONED
-        # globalSecondaryIndexes:
-        #     - IndexName: todoName-index
-        #       KeySchema:
-        #           - AttributeName: todoName
-        #             KeyType: HASH
-        #       Projection:
-        #           ProjectionType: ALL
         TimeToLiveSpecification:
             AttributeName: ExpireAt
             Enabled: true

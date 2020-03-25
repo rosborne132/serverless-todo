@@ -20,5 +20,11 @@ export const Layout = React.memo(({ children }) => (
         <main>{children}</main>
 
         <Footer />
+
+        <style jsx>{`
+            main {
+                min-height: calc(100vh - 60px);
+            }
+        `}</style>
     </>
 ))
