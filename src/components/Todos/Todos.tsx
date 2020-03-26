@@ -4,7 +4,7 @@ import { TodoList } from './TodoList/TodoList'
 
 export const Todos: React.FC = React.memo(
     (): JSX.Element => (
-        <section className="bg-white br4 center pa3 shadow-5 w-two-thirds">
+        <section className="bg-white br4 center pa3 shadow-5">
             <TodoForm />
             <TodoList />
         </section>
