@@ -6,6 +6,15 @@ html {
 }
 body {
     margin: 0;
+    background: rgb(34, 193, 195);
+    background: linear-gradient(
+        0deg,
+        rgba(34, 193, 195, 1) 18%,
+        rgba(253, 45, 225, 1) 96%
+    );
+}
+main {
+    min-height: calc(100vh - 55px);
 }
 h1 {
     font-size: 2em;
@@ -1584,6 +1593,9 @@ code {
 }
 .bg-blue {
     background-color: #357edd;
+}
+.bg-blue-green {
+    background-color: #22c1c3;
 }
 .bg-light-blue {
     background-color: #96ccff;
