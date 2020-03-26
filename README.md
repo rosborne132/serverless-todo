@@ -1,18 +1,13 @@
 # shopping-list-app
 
-This is a shopping list app built with Next.js and aws services
+This is a todo app built with Next.js and AWS services.
 
-Demo [Link](https://www.shopping-list-app.com) <br>
+[Demo](https://d3oml3roltodjp.cloudfront.net)
 
-![Demo](https://res.cloudinary.com/rosborne/image/upload/v1583105642/Shopping-List-App/demo.png)
-
-## Purpose
-
-To help others keep track of there current shopping items.
+![Demo](https://res.cloudinary.com/rosborne/image/upload/v1585198020/Todo/todo-background.png)
 
 ### Tech Used
 
--   Auth0
 -   Dynamodb
 -   Nextjs
 -   React
